@@ -14,4 +14,9 @@ class Post extends AppModel {
 }
 }
 
+<<<<<<< HEAD
 ?>
+=======
+
+ ?>
+>>>>>>> ２回目のコミット
