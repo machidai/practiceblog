@@ -379,7 +379,7 @@ class FormHelper extends AppHelper {
 		$this->inputDefaults($options['inputDefaults']);
 		unset($options['inputDefaults']);
 
-		if (isset($options['action'])) {
+		if (isset($options['url'])) {
 			trigger_error('Using key `action` is deprecated, use `url` directly instead.', E_USER_DEPRECATED);
 		}
 

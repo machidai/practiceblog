@@ -27,6 +27,8 @@ class PostsController extends AppController {
         #$this->loadModel('Category');
         #$category = $this->Category->find('all');
          #debug($category);
+        debug($this->Post->find('all'));
+      
     }
 
     public function view($id = null) {
