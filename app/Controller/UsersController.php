@@ -1,20 +1,14 @@
-<<<<<<< HEAD
-<?php
-=======
-
 <?php
 
->>>>>>> ２回目のコミット
+
+
+
 App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-<<<<<<< HEAD
-        $this->Auth->allow('add');
-    }
-=======
         $this->Auth->allow('add','logout');
     }
 
@@ -31,7 +25,6 @@ class UsersController extends AppController {
 public function logout() {
     $this->redirect($this->Auth->logout());
 }
->>>>>>> ２回目のコミット
 
     public function index() {
         $this->User->recursive = 0;
@@ -96,25 +89,5 @@ public function logout() {
         return $this->redirect(array('action' => 'index'));
     }
 
-<<<<<<< HEAD
-  
-
-    public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Flash->error(__('Invalid username or password, try again'));
-            }
-        }
-    }
-
-    public function logout() {
-        $this->redirect($this->Auth->logout());
-    }
-
-
-=======
->>>>>>> ２回目のコミット
 }
 ?>

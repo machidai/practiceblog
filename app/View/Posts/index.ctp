@@ -7,6 +7,7 @@
     <tr>
         <th>Id</th>
         <th>Title</th>
+        <th>Category</th>
         <th>Created</th>
     </tr>
 
@@ -19,8 +20,9 @@
             <?php echo $this->Html->link($post['Post']['title'],
 array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
         </td>
-<<<<<<< HEAD
-=======
+
+        <td><?php echo $post['Category']['name']; ?></td>
+
         <td>
             <?php
                 echo $this->Form->postLink(
@@ -35,7 +37,7 @@ array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
                 );
             ?>
         </td>
->>>>>>> ２回目のコミット
+
         <td><?php echo $post['Post']['created']; ?></td>
     </tr>
     <?php endforeach; ?>
