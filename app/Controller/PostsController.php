@@ -24,11 +24,11 @@ class PostsController extends AppController {
 
     public function index() {
         $this->set('posts', $this->Post->find('all'));
-        #$this->loadModel('Category');
-        #$category = $this->Category->find('all');
-         #debug($category);
-        debug($this->Post->find('all'));
-      
+        //$this->loadModel('Category');
+        //$category = $this->Category->find('list');
+        // debug($category);
+        //debug($this->Post->find('all'));
+
     }
 
     public function view($id = null) {
@@ -44,11 +44,17 @@ class PostsController extends AppController {
        }
 
        public function add() {
+           $this->loadModel('Category');
+           $category = $this->Category->find('list');
+            $this->set('category_name', $category);
+            $this->loadModel('Tag');
+            $this->set('tag',$this->Tag->find('list'));
        if ($this->request->is('post')) {
            $this->Post->create();
+           debug($this->request->data);
            //Added this line
        $this->request->data['Post']['user_id'] = $this->Auth->user('id');
-           if ($this->Post->save($this->request->data)) {
+           if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
                $this->Flash->success(__('Your post has been saved.'));
                return $this->redirect(array('action' => 'index'));
            }
