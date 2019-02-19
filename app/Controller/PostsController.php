@@ -84,8 +84,11 @@ class PostsController extends AppController {
      $this->set('image',$this->Image->find('list'));
 
     if ($this->request->is(array('post', 'put'))) {
+        debug($this->request->data);
+        exit;
         $this->Post->id = $id;
         if ($this->Post->save($this->request->data)) {
+
             $this->Flash->success(__('Your post has been updated.'));
             return $this->redirect(array('action' => 'index'));
         }
