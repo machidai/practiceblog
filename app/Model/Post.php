@@ -16,10 +16,7 @@ class Post extends AppModel {
   'Image' => array(
     'className' => 'Image',
     'foreignKey' => 'post_id',
-    //'conditions' => array(
-      //'Image.model' => 'Post',
-    ),
-  //),
+    )
 );
   public $hasAndBelongsToMany = array(
   'Tag' =>
@@ -28,6 +25,7 @@ class Post extends AppModel {
       'joinTable'              => 'posts_tags',
       'foreignKey'             => 'post_id',
       'associationForeignKey'  => 'tag_id',
+       'unique' => true,
     )
 );
 

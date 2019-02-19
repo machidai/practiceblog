@@ -77,4 +77,19 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+	public function image() {
+	   $filepath = Router::url();
+	   $len = strlen($filepath);
+	   $filepath = substr($filepath, 6, $len);
+	   $this->layout = false;
+	   $this->render(false);
+	   $imgFile = COMMON_FILE_PATH . $filepath;
+	   $finfo = new finfo(FILEINFO_MIME_TYPE);
+	   $mimeType = $finfo->file($imgFile);
+	   header(‘Content-type: ’ . $mimeType . ‘; charset=UTF-8’);
+	   $pictureFileType = array(‘image/jpg’, ‘image/jpeg’, ‘image/gif’, ‘image/png’, ‘application/pdf’);
+	   if (!in_array($mimeType, $pictureFileType)) header(‘Content-Disposition: attachment; filename*=UTF-8\‘\’' . rawurlencode($getImageName));
+	   readfile($imgFile);
+
+   }
 }

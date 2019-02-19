@@ -2,7 +2,7 @@
 
 class PostsController extends AppController {
     public $helpers = array('Html', 'Form');
-
+    public $scaffold;
 
     public function isAuthorized($user) {
         // 登録済ユーザーは投稿できる
@@ -31,6 +31,13 @@ class PostsController extends AppController {
 
     }
 
+    public function logout() {
+        $this->loadModel('User');
+        $this->redirect($this->Auth->logout());
+        $this->Session->delete('my_id');
+        $this->redirect('/users/login/');
+    }
+
     public function view($id = null) {
            if (!$id) {
                throw new NotFoundException(__('Invalid post'));
@@ -49,9 +56,12 @@ class PostsController extends AppController {
             $this->set('category_name', $category);
             $this->loadModel('Tag');
             $this->set('tag',$this->Tag->find('list'));
+            $this->loadModel('Image');
+            $this->set('image',$this->Image->find('list'));
        if ($this->request->is('post')) {
            $this->Post->create();
-           debug($this->request->data);
+           //debug($this->request->data);
+           //exit;
            //Added this line
        $this->request->data['Post']['user_id'] = $this->Auth->user('id');
            if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
@@ -92,7 +102,7 @@ public function delete($id) {
         throw new MethodNotAllowedException();
     }
 
-    if ($this->Post->delete($id)) {
+    if (!$this->Post->delete($id)) {
         $this->Flash->success(
             __('The post with id: %s has been deleted.', h($id))
         );

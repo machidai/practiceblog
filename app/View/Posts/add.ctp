@@ -13,7 +13,20 @@ echo $this->Form->input('Post.Tag',array(
     'options'=> $tag
 
 ));
-echo $this->Form->input('image', array(
-    'label' => false,
-    'type' => 'file','multiple'));
+echo $this->Form->input('Image.0.attachment', array(
+    'type' => 'file',
+    'label'=>'画像'
+));
+ echo $this->Form->input('Image.0.attachment', array(
+    'type' => 'hidden',
+      'value' => 'Post',
+  ));
+  echo $this->Form->input('Image.1.attachment', array(
+      'type' => 'file',
+      'label'=>'画像'
+  ));
+   echo $this->Form->input('Image.1.attachment', array(
+      'type' => 'hidden',
+        'value' => 'Post',
+    ));
 echo $this->Form->end('Save Post');

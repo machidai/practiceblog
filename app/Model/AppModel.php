@@ -30,4 +30,14 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    public $actsAs = array( 'SoftDelete' );
+
+    public function exists($id = null) {
+        if ($this->Behaviors->attached('SoftDelete')) {
+            return $this->existsAndNotDeleted($id);
+        } else {
+            return parent::exists($id);
+        }
+    }
+
 }

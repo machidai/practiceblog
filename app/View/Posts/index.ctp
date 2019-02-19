@@ -8,7 +8,8 @@
         <th>id</th>
         <th>Title</th>
         <th>Category</th>
-        <th>Function</th>
+        <th>Tags</th>
+        <th>Functions</th>
         <th>Created</th>
     </tr>
 
@@ -22,8 +23,10 @@
 array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
         </td>
 
-        <td><?php echo $this->Html->link($post['Category']['name'],
-      array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])) ; ?></td>
+        <td><?php echo $post['Category']['name']; ?></td>
+
+          <td><?php echo (implode(Hash::extract($post, 'Tag.{n}.title'))) ?></td>
+
 
         <td>
             <?php
