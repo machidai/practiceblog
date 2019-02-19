@@ -77,7 +77,7 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
-	public function image() {
+	/*public function image() {
 	   $filepath = Router::url();
 	   $len = strlen($filepath);
 	   $filepath = substr($filepath, 6, $len);
@@ -91,5 +91,5 @@ class PagesController extends AppController {
 	   if (!in_array($mimeType, $pictureFileType)) header(‘Content-Disposition: attachment; filename*=UTF-8\‘\’' . rawurlencode($getImageName));
 	   readfile($imgFile);
 
-   }
+   }*/
 }

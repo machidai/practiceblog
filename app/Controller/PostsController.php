@@ -31,12 +31,6 @@ class PostsController extends AppController {
 
     }
 
-    public function logout() {
-        $this->loadModel('User');
-        $this->redirect($this->Auth->logout());
-        $this->Session->delete('my_id');
-        $this->redirect('/users/login/');
-    }
 
     public function view($id = null) {
            if (!$id) {
@@ -81,6 +75,13 @@ class PostsController extends AppController {
     if (!$post) {
         throw new NotFoundException(__('Invalid post'));
     }
+    $this->loadModel('Category');
+    $category = $this->Category->find('list');
+     $this->set('category_name', $category);
+     $this->loadModel('Tag');
+     $this->set('tag',$this->Tag->find('list'));
+     $this->loadModel('Image');
+     $this->set('image',$this->Image->find('list'));
 
     if ($this->request->is(array('post', 'put'))) {
         $this->Post->id = $id;

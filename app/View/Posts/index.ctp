@@ -3,6 +3,9 @@
     'Add Post',
     array('controller' => 'posts', 'action' => 'add')
 ); ?>
+<?php
+echo $this->element('logout');
+?>
 <table>
     <tr>
         <th>id</th>
