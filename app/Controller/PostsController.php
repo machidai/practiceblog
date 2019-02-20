@@ -53,7 +53,10 @@ class PostsController extends AppController {
            if (!$post) {
                throw new NotFoundException(__('Invalid post'));
            }
-           $this->set('post', $post);
+           //$this->set('post', $post);
+           if (!$this->request->data) {
+               $this->request->data = $post;//もしも$his->request->dataで来なければ$postを$this->request->dataへ代入する
+           }
        }
 
        public function add() {

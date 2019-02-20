@@ -16,14 +16,14 @@ echo $this->Form->input('Tag',array(
     'multiple'=> 'checkbox',//どのようにセレクト出来るかの種類
     'options'=> $tag
 ));
+//debug($this->request->data);
+//exit;
+foreach ($this->request->data['Image'] as $images):
+echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
+endforeach;
+//echo $this->Html->image('../img/image/'.implode(Hash::extract($this->request->data,'Image.{n}.dir')).'/'.implode(Hash::extract($this->request->data,'Image.{n}.attachment')));
 
-//debug($post['Image']);
-//echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
-//debug($images);
-echo $this->Form->input('Image.0.attachment', array(
-    'type' => '',
-    'label'=>'画像'
-));
+
 echo $this->Form->input('Image.0.attachment', array(
     'type' => 'file',
     'label'=>'画像'
