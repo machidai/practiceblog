@@ -17,8 +17,8 @@ echo $this->Form->input('Tag',array(
     'options'=> $tag
 ));
 
-debug($post['Image']);
-echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
+//debug($post['Image']);
+//echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
 //debug($images);
 echo $this->Form->input('Image.0.attachment', array(
     'type' => '',
