@@ -3,6 +3,18 @@
 class PostsController extends AppController {
     public $helpers = array('Html', 'Form');
     public $scaffold;
+    public $components = array('Paginator','Search.Prg');
+    public $presetVars = array(
+       'user_id' => array(
+           'type' => 'value'
+       ),
+       'keyword' => array(
+           'type' => 'value'
+       )
+   );
+
+
+
 
     public function isAuthorized($user) {
         // 登録済ユーザーは投稿できる
@@ -50,12 +62,8 @@ class PostsController extends AppController {
             $this->set('category_name', $category);
             $this->loadModel('Tag');
             $this->set('tag',$this->Tag->find('list'));
-            $this->loadModel('Image');
-            $this->set('image',$this->Image->find('list'));
        if ($this->request->is('post')) {
            $this->Post->create();
-           //debug($this->request->data);
-           //exit;
            //Added this line
        $this->request->data['Post']['user_id'] = $this->Auth->user('id');
            if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
@@ -76,18 +84,21 @@ class PostsController extends AppController {
         throw new NotFoundException(__('Invalid post'));
     }
     $this->loadModel('Category');
-    $category = $this->Category->find('list');
+    $category = $this->Category->find('list', array(
+         'recursive' => -1
+    ));
      $this->set('category_name', $category);
      $this->loadModel('Tag');
      $this->set('tag',$this->Tag->find('list'));
      $this->loadModel('Image');
      $this->set('image',$this->Image->find('list'));
-
+     //debug($this->request->data);
+     //exit;
     if ($this->request->is(array('post', 'put'))) {
         debug($this->request->data);
         exit;
         $this->Post->id = $id;
-        if ($this->Post->save($this->request->data)) {
+        if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
 
             $this->Flash->success(__('Your post has been updated.'));
             return $this->redirect(array('action' => 'index'));

@@ -1,6 +1,5 @@
 <h1>Add Post</h1>
 <?php
-debug($tag);
 echo $this->Form->create('Post',array('type'=>'> file',
 'enctype' => 'multipart/form-data'));
 echo $this->Form->input('title');
@@ -13,6 +12,7 @@ echo $this->Form->input('Post.Tag',array(
     'options'=> $tag
 
 ));
+
 echo $this->Form->input('Image.0.attachment', array(
     'type' => 'file',
     'label'=>'画像'

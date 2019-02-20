@@ -8,11 +8,11 @@ public $actsAs = array(
       'attachment' => array(
         "path" => "{ROOT}webroot{DS}img{DS}image{DS}",
         "rootDir" => ROOT . DS . APP_DIR . DS,
-        /*'thumbnailSizes' => array(
+        'thumbnailSizes' => array(
          'xvga' => '1024x768',
          'vga' => '640x480',
           'thumb' => '80x80',
-      ),*/
+      ),
       ),
     ),
 );

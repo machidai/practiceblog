@@ -8,6 +8,7 @@
 <h1>画像</h1>
 
 <?php
+debug($post['Image']);
 foreach ($post['Image'] as $images):
 echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
 

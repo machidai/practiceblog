@@ -33,7 +33,7 @@ array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
 
         <td>
             <?php
-                echo $this->Form->postLink(
+                echo $this->Form->postLink(//Html->linkだとviewを作らないといけないが
                     'Delete',
                     array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Are you sure?')
@@ -43,6 +43,9 @@ array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
                 echo $this->Html->link(
                     'Edit', array('action' => 'edit', $post['Post']['id'])
                 );
+
+
+
             ?>
         </td>
 

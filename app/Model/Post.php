@@ -2,6 +2,21 @@
 App::uses('AppModel', 'Model');
 class Post extends AppModel {
   public $useTable = 'posts';
+
+  public $actsAs = array('Search.Searchable');
+  public $filterArgs = array(
+      'user_id' => array(
+          'type' => 'value'
+      ),
+      'keyword' => array(
+          'type' => 'like',
+          'field' => array(
+              'User.username',
+              'Post.content'
+          )
+      ),
+  );
+
   public $belongsTo ='Category';
 
   public $validate = array(

@@ -3,7 +3,9 @@
 echo $this->element('logout');
 ?>
 <?php
-echo $this->Form->create('Post');
+echo $this->Form->create('Post',array('type'=>'> file',
+'enctype' => 'multipart/form-data'));
+
 echo $this->Form->input('title');
 echo $this->Form->input('content', array('rows' => '3'));
 echo $this->Form->input('id', array('type' => 'hidden'));
@@ -13,7 +15,14 @@ echo $this->Form->input('Tag',array(
      'label' => 'タグ一覧',
     'multiple'=> 'checkbox',//どのようにセレクト出来るかの種類
     'options'=> $tag
+));
 
+debug($post['Image']);
+echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
+//debug($images);
+echo $this->Form->input('Image.0.attachment', array(
+    'type' => '',
+    'label'=>'画像'
 ));
 echo $this->Form->input('Image.0.attachment', array(
     'type' => 'file',

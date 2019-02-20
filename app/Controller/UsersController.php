@@ -9,7 +9,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add','logout');
+        $this->Auth->allow('add','logout','delete');
     }
 
     public function login() {
@@ -75,7 +75,7 @@ public function logout() {
         // Prior to 2.5 use
         // $this->request->onlyAllow('post');
 
-        $this->request->allowMethod('post');
+        $this->request->allowMethod('post');//許可されたhttpメソッドを設定する(この場合postからリクエストが来た場合許可する)
 
         $this->User->id = $id;
         if (!$this->User->exists()) {
