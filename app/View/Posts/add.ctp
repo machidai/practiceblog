@@ -15,18 +15,20 @@ echo $this->Form->input('Post.Tag',array(
 
 echo $this->Form->input('Image.0.attachment', array(
     'type' => 'file',
-    'label'=>'画像'
+    'label'=>'画像',
+    'value' => 'Post'
 ));
- echo $this->Form->input('Image.0.attachment', array(
-    'type' => 'hidden',
-      'value' => 'Post',
-  ));
+ //echo $this->Form->input('Image.0.attachment', array(
+    //'type' => 'hidden',
+     // 'value' => 'Post',
+  //));
   echo $this->Form->input('Image.1.attachment', array(
       'type' => 'file',
-      'label'=>'画像'
+      'label'=>'画像',
+      'value' => 'Post'
   ));
-   echo $this->Form->input('Image.1.attachment', array(
-      'type' => 'hidden',
-        'value' => 'Post',
-    ));
+   //echo $this->Form->input('Image.1.attachment', array(
+     // 'type' => 'hidden',
+    //   'value' => 'Post',
+    //));
 echo $this->Form->end('Save Post');

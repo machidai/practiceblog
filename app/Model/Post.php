@@ -23,8 +23,12 @@ class Post extends AppModel {
       'title' => array(
           'rule' => 'notBlank'
       ),
-      'body' => array(
+      'content' => array(
           'rule' => 'notBlank'
+      ),
+      'attachment' => array(
+          'rule' => 'notBlank',
+           'allowEmpty' => true
       )
   );
   public $hasMany = array(

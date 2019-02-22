@@ -61,7 +61,9 @@ class PostsController extends AppController {
 
        public function add() {
            $this->loadModel('Category');
-           $category = $this->Category->find('list');
+           $category = $this->Category->find('list', array(
+                'recursive' => -1
+           ));
             $this->set('category_name', $category);
             $this->loadModel('Tag');
             $this->set('tag',$this->Tag->find('list'));
@@ -76,13 +78,12 @@ class PostsController extends AppController {
            $this->Flash->error(__('Unable to add your post.'));
        }
    }
-
    public function edit($id = null) {
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));
     }
 
-    $post = $this->Post->findById($id);
+    $post = $this->Post->findById($id);//送られてきた内容の中のidだけ取り出して$postに入れる
     if (!$post) {
         throw new NotFoundException(__('Invalid post'));
     }
@@ -93,14 +94,13 @@ class PostsController extends AppController {
      $this->set('category_name', $category);
      $this->loadModel('Tag');
      $this->set('tag',$this->Tag->find('list'));
-     $this->loadModel('Image');
-     $this->set('image',$this->Image->find('list'));
+     //$this->loadModel('Image');
+     //$this->set('image',$this->Image->find('list'));
      //debug($this->request->data);
      //exit;
+     
     if ($this->request->is(array('post', 'put'))) {
-        debug($this->request->data);
-        exit;
-        $this->Post->id = $id;
+        $this->Post->id = $id;//
         if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
 
             $this->Flash->success(__('Your post has been updated.'));
@@ -108,18 +108,15 @@ class PostsController extends AppController {
         }
         $this->Flash->error(__('Unable to update your post.'));
     }
-
     if (!$this->request->data) {
         $this->request->data = $post;
     }
 }
 
-
 public function delete($id) {
     if ($this->request->is('get')) {
         throw new MethodNotAllowedException();
     }
-
     if (!$this->Post->delete($id)) {
         $this->Flash->success(
             __('The post with id: %s has been deleted.', h($id))
