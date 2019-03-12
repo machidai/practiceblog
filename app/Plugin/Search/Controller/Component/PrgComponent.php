@@ -196,6 +196,7 @@ class PrgComponent extends Component {
 		$parsedParams = array();
 		$data = array($model => array());
 		foreach ($this->controller->presetVars as $field) {
+
 			if (!isset($args[$field['field']])) {
 				continue;
 			}
@@ -205,7 +206,7 @@ class PrgComponent extends Component {
 				$fieldContent = str_replace(array('-', '_'), array('/', '='), $args[$field['field']]);
 				$args[$field['field']] = base64_decode($fieldContent);
 			}
-			
+
 			switch ($field['type']) {
 				case 'lookup':
 					if (!empty($args[$field['field']])) {
@@ -219,7 +220,7 @@ class PrgComponent extends Component {
 						$data[$model][$field['formField']] = $result[$searchModel][$field['modelField']];
 					}
 					break;
-				
+
 				case 'checkbox':
 					$values = explode('|', $args[$field['field']]);
 					$parsedParams[$field['field']] = $values;

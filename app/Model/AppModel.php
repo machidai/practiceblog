@@ -31,13 +31,12 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
     public $actsAs = array( 'SoftDelete' );
-
     public function exists($id = null) {
         if ($this->Behaviors->attached('SoftDelete')) {
-            return $this->existsAndNotDeleted($id);
+           return $this->existsAndNotDeleted($id);
         } else {
-            return parent::exists($id);
-        }
-    }
+           return parent::exists($id);
+       }
+   }
 
 }

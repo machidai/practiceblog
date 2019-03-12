@@ -21,6 +21,7 @@ public $actsAs = array(
    'Post' => array(
      'className' => 'Post',
      'foreignKey' => 'post_id',
+     'dependent' => true
    )
 );
    }

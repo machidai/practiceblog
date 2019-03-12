@@ -1,50 +1,75 @@
 <?php
 App::uses('AppModel', 'Model');
 class Post extends AppModel {
-  public $useTable = 'posts';
+    public $useTable = 'posts';
 
-  public $actsAs = array('Search.Searchable');
-  public $filterArgs = array(
-      'user_id' => array(
-          'type' => 'value'
-      ),
-      'keyword' => array(
-          'type' => 'like',
-          'field' => array(
-              'User.username',
-              'Post.content'
-          )
-      ),
+    public $actsAs = array('Search.Searchable');
+    public $filterArgs = array(
+        'title' => array(
+            'type' => 'like',
+            'field' => 'title',
+        ),
+        'category_id' => array(
+            'type' => 'value',
+            'field' => 'category_id',
+        ),
+        'tag_id' => array(
+            'type' => 'subquery',
+            'method' => 'findByTag',
+            'field' => 'Post.id',
+        ),
+
   );
+    //orの状態
+    function findByTag($data = array()) {
+        $condition = ['tag_id' => $data['tag_id']];
+        $db = $this->getDataSource();
+        $subQuery = $db->buildStatement(
+    array(
+        'fields' => array('post_id'),//sqlのselectにあたる
+        'table' => 'posts_tags',//sqlのfromにあたる
+        'alias' => 'PostsTag',//sqlのasにあたる
+        'conditions' => $condition,
+    ),
+    $this
+);
+        return $subQuery;
 
-  public $belongsTo ='Category';
 
-  public $validate = array(
-      'title' => array(
-          'rule' => 'notBlank'
-      ),
-      'content' => array(
-          'rule' => 'notBlank'
-      ),
-      'attachment' => array(
-          'rule' => 'notBlank',
-           'allowEmpty' => true
-      )
+}
+
+
+
+
+
+    public $belongsTo ='Category';
+
+    public $validate = array(
+        'title' => array(
+            'rule' => 'notBlank',
+            'allowEmpty'=>true,//空欄でも可にする
+    ),
+        'content' => array(
+            'rule' => 'notBlank'
+    ),
+
   );
   public $hasMany = array(
   'Image' => array(
     'className' => 'Image',
     'foreignKey' => 'post_id',
+    'dependent' => true
     )
 );
   public $hasAndBelongsToMany = array(
   'Tag' =>
     array(
-      'className'              => 'Tag',
-      'joinTable'              => 'posts_tags',
-      'foreignKey'             => 'post_id',
-      'associationForeignKey'  => 'tag_id',
-       'unique' => true,
+        'className'              => 'Tag',
+        'joinTable'              => 'posts_tags',
+        'foreignKey'             => 'post_id',
+        'associationForeignKey'  => 'tag_id',
+        'unique' => true,
+        'with' => 'PostsTag',
     )
 );
 
