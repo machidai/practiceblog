@@ -19,14 +19,12 @@ echo $this->Form->input('Tag',array(
 
 ?>
 
+<?php $indexMax = 0; ?>
 
-
-<?php foreach ($this->request->data['Image'] as $index=>$images):?>
+<?php foreach ($this->request->data['Image'] as $index=>$images):?><!--foreachでpostに結びついているImage.idを持ってくる。0がindex,配列内容が＄image-->
     <div class="photo">
     <!--app/webroot/img/image/$images['dir']/$images['attachment']をデータベースを参考にしてフォルダから取り出している。-->
 <?php
-//debug($images['deleted']);
-//exit;
 echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
 echo $this->Form->button('削除',array(
     'type' => 'button',
@@ -39,31 +37,22 @@ echo $this->Form->input('Image.'.$index.'.deleted', array(
     'value' => $images['deleted'] === false ? '0' :'1'
 ));
 //debug($this->request->data['Image'][$index]['deleted']);
-//var_dump($images['deleted']);
+var_dump($images['deleted']);
+
 ?>
 </div>
+<?php $indexMax =max($indexMax,$index); ?>
+
 <?php endforeach; ?>
 <!--echo $this->Html->image('../img/image/'.implode(Hash::extract($this->request->data,'Image.{n}.dir')).'/'.implode(Hash::extract($this->request->data,'Image.{n}.attachment')));-->
-
 <?php
-echo $this->Form->input('Image.0.attachment', array(
+for($i=1;$i<=2;$i++){
+echo $this->Form->input("Image.".($indexMax+$i).".attachment", array(
     'type' => 'file',
     'label'=>'画像',
-    'multiple',
 ));
- /*echo $this->Form->input('Image.0.attachment', array(
-    'type' => 'hidden',
-      'value' => 'Post',
-  ));*/
-  echo $this->Form->input('Image.1.attachment', array(
-     'type' => 'file',
-      'label'=>'画像',
-      'multiple',
-  ));
-   /*echo $this->Form->input('Image.1.attachment', array(
-      'type' => 'hidden',
-        'value' => 'Post',
-    ));*/
+}
+
 
 echo $this->Form->end('Save Post');
 

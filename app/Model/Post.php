@@ -20,7 +20,9 @@ class Post extends AppModel {
         ),
 
   );
-    //orの状態
+    //orの状態(邦楽だけか、邦楽とそれ以外が入っているもの)
+    //andにする
+
     function findByTag($data = array()) {
         $condition = ['tag_id' => $data['tag_id']];
         $db = $this->getDataSource();
@@ -30,11 +32,13 @@ class Post extends AppModel {
         'table' => 'posts_tags',//sqlのfromにあたる
         'alias' => 'PostsTag',//sqlのasにあたる
         'conditions' => $condition,
+        'group' => array('post_id'),
+        'having' => array('COUNT(*) =' => count($data['tag_id'])),
     ),
+
     $this
 );
         return $subQuery;
-
 
 }
 
