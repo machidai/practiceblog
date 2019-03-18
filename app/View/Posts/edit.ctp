@@ -34,10 +34,11 @@ echo $this->Form->input('Image.'.$index.'.id', array(
 ));
 echo $this->Form->input('Image.'.$index.'.deleted', array(
     'type' => 'hidden',
-    'value' => $images['deleted'] === false ? '0' :'1'
+    'value' => $images['deleted'] === false ? '0' :'1',
+    'controller' => 'Posts', 'action' => 'delete',
 ));
 //debug($this->request->data['Image'][$index]['deleted']);
-var_dump($images['deleted']);
+//var_dump($images['deleted']);
 
 ?>
 </div>

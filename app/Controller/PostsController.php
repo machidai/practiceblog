@@ -100,11 +100,10 @@ public function edit($id = null) {//$idの中には洗濯したeditのidが入�
     $this->set('category_name', $category);
     $this->set('tag',$this->Tag->find('list'));
 
-
     if ($this->request->is(array('post', 'put'))) {
         $this->Post->id = $id;
-        debug($this->request->data);
-        exit;
+        //debug($this->request->data);
+        //exit;
         if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
             $this->Flash->success(__('Your post has been updated.'));
             return $this->redirect(array('action' => 'index'));
@@ -118,10 +117,12 @@ public function edit($id = null) {//$idの中には洗濯したeditのidが入�
 
 
 public function delete($id) {
+
     if ($this->request->is('get')) {
         throw new MethodNotAllowedException();
     }
-    if (!$this->Post->delete($id)) {
+
+    if ($this->Post->delete($id)) {
 
         $this->Flash->success(
             __('The post with id: %s has been deleted.', h($id))

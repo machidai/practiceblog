@@ -62,7 +62,8 @@ class Post extends AppModel {
   'Image' => array(
     'className' => 'Image',
     'foreignKey' => 'post_id',
-    'dependent' => true
+    'dependent' => true,
+    'conditions' => array('Image.deleted' => '0'),
     )
 );
   public $hasAndBelongsToMany = array(
