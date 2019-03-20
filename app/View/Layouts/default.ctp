@@ -21,6 +21,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
@@ -37,16 +38,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
 	<div id="container">
-		<div id="header">
+		<!--<div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
-		</div>
+		</div>-->
 		<div id="content">
 
 			<?php echo $this->Flash->render(); ?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
+		<!--<div id="footer">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
 					'https://cakephp.org/',
@@ -56,8 +57,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<p>
 				<?php echo $cakeVersion; ?>
 			</p>
-		</div>
+		</div>-->
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<!--<?php echo $this->element('sql_dump'); ?>-->
 </body>
+
 </html>

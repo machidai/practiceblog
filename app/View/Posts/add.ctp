@@ -1,4 +1,21 @@
-<h1>Add Post</h1>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <div class="nav-link active">
+        <?php echo $this->Html->link('Add Post',array(
+            'controller' => 'posts',
+            'action' => 'add',
+        )); ?>
+        </div>
+    </li>
+    <li class="nav-item">
+        <div class="nav-link">
+            <?php echo $this->element('logout'); ?>
+        </div>
+    </li>
+</ul>
 <?php
 echo $this->Form->create('Post',array('type'=>'> file',
 'enctype' => 'multipart/form-data'));

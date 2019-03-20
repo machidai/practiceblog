@@ -15,6 +15,69 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+.main{
+	float: left;
+	width: 70%;
+	margin-bottom: 40px;
+}
+.sidebar{
+	float: right;
+	width: 28%;
+	padding-left: 20px;
+	margin-top: 150px;
+	background-color: #EEEEEE;
+}
+.search{
+	width: 350px;
+	height: 300px;
+	background-color: #EEEEEE;
+	clear: both;
+	display: none;
+}
+.search-header{
+	cursor: pointer;
+}
+.search>.input{
+	margin: 0;
+}
+header{
+	height: 150px;
+	display: table;
+ 	width: 100%;
+}
+.title{
+	font-size: 60px;
+	text-align: center;
+	display: table-cell;
+ 	vertical-align: middle;
+}
+a {
+	color: black;
+}
+.checkbox{
+	display: inline-block;
+	margin: 0;
+}
+footer{
+	text-align: center;
+	vertical-align: middle;
+	opacity: 0.7;
+	height: 130px;
+	padding-top: 44px;
+	clear: both;
+	background-color: #EEEEEE;
+}
+.footer-inside>p{
+	margin: 0;
+}
+*{
+	font-family: serif;
+}
+
+
+
+
+
 * {
 	margin:0;
 	padding:0;
@@ -29,12 +92,12 @@ body {
 	margin: 0;
 }
 a {
-	color: #003d4c;
+	/*color: #003d4c;
 	text-decoration: underline;
-	font-weight: bold;
+	font-weight: bold;*/
 }
 a:hover {
-	color: #367889;
+	/*color: #367889;*/
 	text-decoration:none;
 }
 a img {
@@ -100,7 +163,7 @@ p {
 	background: #fff;
 	clear: both;
 	color: #333;
-	padding: 10px 20px 40px 20px;
+	/*padding: 10px 20px 40px 20px;*/
 	overflow: auto;
 }
 #footer {

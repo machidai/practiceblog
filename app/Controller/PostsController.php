@@ -40,8 +40,7 @@ class PostsController extends AppController {
     public function index() {
         $this->Prg->commonProcess();
         $this->paginate = array(
-
-            //ダブルクォーとだと文字列の中に変数を入れることが可能
+            'limit' => 10,
            'conditions' => $this->Post->parseCriteria($this->passedArgs),//getで受け取ったものが$this->passedArgsに入る
     );
         $this->set('posts', $this->paginate());
