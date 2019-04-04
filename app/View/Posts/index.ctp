@@ -5,10 +5,10 @@
     </li>
     <li class="nav-item">
         <div class="nav-link">
-        <?php echo $this->Html->link('Add Post',array(
-            'controller' => 'posts',
-            'action' => 'add',
-        )); ?>
+            <?php echo $this->Html->link('Add Post',array(
+                'controller' => 'posts',
+                'action' => 'add',
+            )); ?>
         </div>
     </li>
     <li class="nav-item">
@@ -59,9 +59,7 @@
 <div class="main">
 <header>
     <h1 class="title">The Cakephp Blog</h1>
-
 </header>
-
 
 <table>
     <tr>
@@ -74,6 +72,7 @@
     </tr>
 
     <!-- ここから、$posts配列をループして、投稿記事の情報を表示 -->
+
     <?php foreach ($posts as $post): ?>
     <tr>
         <td><?php echo $post['Post']['id']; ?></td>
@@ -85,8 +84,6 @@ array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
         <td><?php echo $post['Category']['name']; ?></td>
 
           <td><?php echo (implode(Hash::extract($post, 'Tag.{n}.title'))) ?></td>
-
-
         <td>
             <?php
                 echo $this->Form->postLink(//Html->linkだとviewを作らないといけないが

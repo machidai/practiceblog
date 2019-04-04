@@ -43,19 +43,18 @@ class Post extends AppModel {
 }
 
 
-
-
-
     public $belongsTo ='Category';
 
     public $validate = array(
         'title' => array(
             'rule' => 'notBlank',
-            'allowEmpty'=>true,//空欄でも可にする
+            'message' => '空欄です'
     ),
         'content' => array(
-            'rule' => 'notBlank'
+            'rule' => 'notBlank',
+            'message'=>"空欄です",
     ),
+
 
   );
   public $hasMany = array(
@@ -63,7 +62,10 @@ class Post extends AppModel {
     'className' => 'Image',
     'foreignKey' => 'post_id',
     'dependent' => true,
-    'conditions' => array('Image.deleted' => '0'),
+    'fields' => array('Image.*','Image.attachment as filename'),//Imageのattachmentの内容をfilenameとする
+    'conditions' => array(//アソシエーション先(Image)の表示条件みたいなもの
+        'Image.deleted' => '0',//Postに紐づけられている、Imageのdeletedが０のものだけ表示する。という意味？
+        ),
     )
 );
   public $hasAndBelongsToMany = array(

@@ -1,17 +1,31 @@
 $(function () {
-   $('button').click(function () {
-      $(this).closest('.photo').hide();
-        $(this).nextAll('input[value="0"]').attr('value', '1');
+    $('button').click(function () {
+        $(this).closest('.photo').hide();
+        $(this).next('input[value="0"]').val('1');
+    });
 
-});
-    $('.pop').click(function(e){
-        e.preventDefault();
-        var id = $(this).attr('href');
-        $(id).fadeIn();
-        $('.popupbg').fadeIn();
+    $('.photo').each(function(){
+        if($(this).nextAll('input[value="1"]')){
+            $(this).hide();
+        };
     })
-    $('.popupbg,.close_btn').click(function(){
-        $('.popup_wrapper:visible').fadeOut();
-        $('.popupbg').fadeOut();
-    })
+
+    var value = $('.hide').val();
+        if(value === "1"){
+            $("input[value='1']").closest('.photo').css("display","none");
+        };
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET',);
+    xhr.send();
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4 && xhr.status === 200){
+
+        }
+    }
 });
+//$(window).on('load', function() {
+
+//});

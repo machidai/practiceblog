@@ -69,14 +69,20 @@ class PostsController extends AppController {
                 'recursive' => -1
             ));
             $this->set('category_name', $category);
-            $this->loadModel('Tag');
             $this->set('tag',$this->Tag->find('list'));
-            if ($this->request->is('post')) {
-                $this->Post->create();
 
-          //debug($this->request->data);
-          //exit;
-        $this->request->data['Post']['user_id'] = $this->Auth->user('id');
+            if ($this->request->is('post')) {//postにidがセットされているかtrueかfalseで返す
+                $this->Post->create();
+                //debug($this->Auth->user('id'));
+                //exit;
+        $this->request->data['Post']['user_id'] = $this->Auth->user('id');//私用しているユーザーのidを
+            foreach ($this->request->data['Image'] as $index=>$images){
+                if($images['attachment']['error'] == 4){
+                    unset($this->request->data['Image'][$index]);
+                }
+            }
+        //debug($this->request->data);
+        //exit;
             if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
                 $this->Flash->success(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -85,35 +91,58 @@ class PostsController extends AppController {
         }
     }
 
-public function edit($id = null) {//$idの中には洗濯したeditのidが入っている
+public function edit($id = null) {//$idの中には洗濯したeditのPostのidが入っている
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));
     }
-    $post = $this->Post->findById($id);//送られてきた内容の中のidだけ取り出して$postに入れる
+    $post = $this->Post->findById($id);//送られてきたpost_id($id)の情報をPostデータベースからfindして取り出す
+    //ここでPostモデルのデータベースの中を全て表示する
     if (!$post) {
         throw new NotFoundException(__('Invalid post'));
     }
+
     $category = $this->Category->find('list', array(
          'recursive' => -1
     ));
     $this->set('category_name', $category);
     $this->set('tag',$this->Tag->find('list'));
 
-    if ($this->request->is(array('post', 'put'))) {
-        $this->Post->id = $id;
+    if ($this->request->is(array('post', 'put'))) {//is()はリクエストがある基準に適合するかどうかを調べます
+        $this->Post->id = $id;  //$this->Post->id=Postモデルのpost_id $idはリクエストされてきた記事のid
         //debug($this->request->data);
         //exit;
-        if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
+        foreach($this->request->data['Image'] as $index => $image){
+            if(isset($image['attachment']['error'])){
+                if($image['attachment']['error']==4){
+                    unset($this->request->data['Image'][$index]);
+                }
+            }
+        }
+        if ($this->Post->saveAll($this->request->data,array('deep' => true))) {//Postモデル(DB)にセーブする
             $this->Flash->success(__('Your post has been updated.'));
             return $this->redirect(array('action' => 'index'));
         }
         $this->Flash->error(__('Unable to update your post.'));
+
     }
-    if (!$this->request->data) {
+
+
+    if (!$this->request->data) {//getの時は通ってる。postの時は通ってない
         $this->request->data = $post;
+    }else{
+        foreach ($this->request->data['Image'] as $index=>$image){
+            if(!isset($image['deleted'])){
+                unset($this->request->data['Image'][$index]);
+            }else{
+                if($this->request->data['Image'][$index]['deleted'] === '0'){
+                        $this->request->data['Image'][$index]['deleted'] = false;
+                }
+            }
+            //debug($this->request->data);
+            //exit;
+        }
     }
 }
-
 
 public function delete($id) {
 

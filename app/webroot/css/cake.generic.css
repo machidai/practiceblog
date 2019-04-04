@@ -16,13 +16,13 @@
  */
 
 .main{
-	float: left;
-	width: 70%;
+	/*float: left;*/
+	/*width: 70%;*/
 	margin-bottom: 40px;
 }
 .sidebar{
-	float: right;
-	width: 28%;
+	/*float: right;*/
+	/*width: 28%;*/
 	padding-left: 20px;
 	margin-top: 150px;
 	background-color: #EEEEEE;
@@ -70,8 +70,16 @@ footer{
 .footer-inside>p{
 	margin: 0;
 }
+.photo{
+	display: inline;
+}
 *{
 	font-family: serif;
+}
+.category{
+	padding:5;
+	margin:0;
+	font-size: 15px;
 }
 
 
