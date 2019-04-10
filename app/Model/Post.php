@@ -48,7 +48,8 @@ class Post extends AppModel {
     public $validate = array(
         'title' => array(
             'rule' => 'notBlank',
-            'message' => '空欄です'
+            'message' => '空欄です',
+            'allowEmpty'=> true,
     ),
         'content' => array(
             'rule' => 'notBlank',

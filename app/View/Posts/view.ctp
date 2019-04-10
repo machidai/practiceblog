@@ -18,34 +18,28 @@
 <p><?php echo h($posts['content']); ?></p>
 
 <h1>画像</h1>
-
-<?php foreach ($this->request->data['Image'] as $images):?>
-
-<p><a href="#modal01" class="modalOpen">
-    <?php echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
-    ?>
-</a></p>
-<!-- モーダルウィンドウ -->
-<div class="modal" id="modal01">
+<div class="slider-block">
+    <?php foreach ($this->request->data['Image'] as $index => $images):?>
+    <div class="me">
+        <p><a href='' class="modalOpen">
+            <?php echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment']);
+            ?>
+        </a></p>
+        <div class="modal">
     <!-- モーダルウィンドウが開いている時のオーバーレイ -->
-    <div class="overLay modalClose"></div>
-
+            <div class="overLay modalClose"></div>
     <!-- モーダルウィンドウの中身 -->
-    <div class="slider">
-        <div class="slideSet">
             <div class="inner">
-                <?php echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment'],array('class'=>'slide','width'=>500));
-                ?>
-                <button class="slider-prev">前へ</button>
-                <button class="slider-next">次へ</button>
-                <a href="" class="modalClose">Close</a>
+                <?php echo $this->Html->image('../img/image/' .$images['dir'] . '/' .$images['attachment'],array(
+                'class'=> $index,'width'=>500));?>
+                <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+                <a href="" class="modalClose close">✖︎</a>
             </div>
         </div>
     </div>
+    <?php endforeach; ?>
 </div>
-
-<?php endforeach; ?>
-
 <!--echo $this->Html->image('../img/image/' .implode(Hash::extract($post, 'Image.{n}.dir')) . '/' .implode(Hash::extract($post, 'Image.{n}.attachment')));
 debug($images);
 exit;-->

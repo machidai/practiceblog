@@ -2,51 +2,48 @@ $(function(){
 
 // モーダルウィンドウが開くときの処理
 $(".modalOpen").click(function(){
+    $modal = $(this).closest('.me').find('.modal');
+    $modal.show();//#modal01をfadeInする
+    $modal.children(".inner").css("animation","fadeIn 2s ease 0s 1 normal");//href(#modal01)の子要素である.innerを取得してcssを加える
 
-    var navClass = $(this).attr("class"),//navClassに”modalOpen”を取得
-        href = $(this).attr("href");//href="#modal01”を取得
-        $(href).show();//#modal01をfadeInする
-    $(this).addClass("open");
-
-     $(href).children(".inner").css("animation","fadeIn 2s ease 0s 1 normal");//href(#modal01)の子要素である.innerを取得してcssを加える
+    if(!$modal.closest('.me').prev('.me')[0]){
+        $modal.find('.slider-prev').hide();
+    };
+    if(!$modal.closest('.me').next('.me')[0]){
+        $modal.find('.slider-next').hide();
+    };
     return false;
 });
 
-//slider
-/*
-var slideWidth = $('.slide').outerWidth();	// .slideの幅を取得して代入
-	var slideNum = $('.slide').length;	// .slideの数を取得して代入
-	var slideSetWidth = slideWidth * slideNum;	// .slideの幅×数で求めた値を代入
-	$('.slideSet').css('width', slideSetWidth);	// .slideSetのスタイルシートにwidth: slideSetWidthを指定
+$(".slider-next").click(function(){
+    $(this).closest('.modal').hide();
+    $nextModal = $(this).closest('.me').next('.me').find('.modal');
+    if(!$nextModal.closest('.me').prev('.me')[0]){
+        $nextModal.find('.slider-prev').hide();
+    };
+    if(!$nextModal.closest('.me').next('.me')[0]){
+        $nextModal.find('.slider-next').hide();
+    };
+    $nextModal.show();
+    $nextModal.children(".inner").css("animation","fadeIn 2s ease 0s 1 normal");
 
-	var slideCurrent = 0;	// 現在地を示す変数
+});
 
-	// アニメーションを実行する独自関数
-	var sliding = function(){
-		// slideCurrentが0以下だったら
-		if( slideCurrent < 0 ){
-			slideCurrent = slideNum - 1;
+$(".slider-prev").click(function(){
+    $(this).closest('.modal').hide();
+    $prevModal = $(this).closest('.me').prev('.me').find('.modal');
+    if(!$prevModal.closest('.me').prev('.me')[0]){
+        $prevModal.find('.slider-prev').hide();
+    };
+    if(!$prevModal.closest('.me').next('.me')[0]){
+        $prevModal.find('.slider-next').hide();
+    };
+    $prevModal.show();
+    $prevModal.children(".inner").css("animation","fadeIn 2s ease 0s 1 normal");
+});
 
-		// slideCurrentがslideNumを超えたら
-		}else if( slideCurrent > slideNum - 1 ){	// slideCUrrent >= slideNumでも可
-			slideCurrent = 0;
-
-		}
-
-		$('.slideSet').stop().animate({
-			left: slideCurrent * -slideWidth
-		});
-	}
-
-	// 前へボタンが押されたとき
-	$('.slider-prev').click(function(){
-		slideCurrent--;
-		sliding();
-	});
-
-	// 次へボタンが押されたとき
-	$('.slider-next').click(function(){
-		slideCurrent++;
-		sliding();
-	});*/
+$(".modalClose").click(function(){
+   $(this).parents(".modal").hide();
+   return false
+});
 });

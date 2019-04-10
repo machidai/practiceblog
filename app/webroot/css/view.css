@@ -14,12 +14,12 @@ body {
 
 /* オーバーレイのスタイル */
 .overLay {
-  position:absolute;
+  position:fixed;
   top:0;
   left:0;/*中心に固定*/
   background:rgba(200,200,200,0.7);/*0,7はopacity*/
   width:100%;
-  height:100vh;
+  height:120%;
   z-index:10;
 }
 
@@ -31,7 +31,25 @@ body {
   left:50%;
   transform:translate(-50%,-50%);
 }
-
+.slider-prev{
+    position: absolute;
+    z-index:12;
+    top:50%;
+    left:0%;
+    transform:translate(-50%,-50%);
+    font-size: 40px;
+}
+.slider-next{
+    position: absolute;
+    z-index:12;
+    top:50%;
+    right:-3%;
+    transform:translate(-50%,-50%);
+    font-size: 40px;
+}
+.close{
+    font-size: 40px;
+}
 @keyframes fadeIn{
   0% {opacity:0}
   100% {opacity:1}/*開始時はopacity0,表示1にfadeIn*/
@@ -40,3 +58,5 @@ body {
   0% {top:50%}
   100% {top:100%}
 }
+
+/*slider*/
