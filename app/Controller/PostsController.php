@@ -35,17 +35,25 @@ class PostsController extends AppController {
         return parent::isAuthorized($user);
     }
 
-
+    public function beforeRender(){
+        $this->set('categories', $this->Category->find('list'));
+        $this->set('tags', $this->Tag->find('list'));
+    }
 
     public function index() {
-        $this->Prg->commonProcess();
+        //debug($this->request->data);
+        //exit;
+        $this->Prg->commonProcess();//検索条件データの関連付けを行う。
         $this->paginate = array(
             'limit' => 10,
            'conditions' => $this->Post->parseCriteria($this->passedArgs),//getで受け取ったものが$this->passedArgsに入る
-    );
-        $this->set('posts', $this->paginate());
-        $this->set('categories', $this->Category->find('list'));
-        $this->set('tags', $this->Tag->find('list'));
+    );      $post = $this->paginate();
+            /*if ($this->request->is('requested')) {
+                return $posts;
+            }*/
+            $this->set('posts', $post);
+            $this->set('categories', $this->Category->find('list'));
+            $this->set('tags', $this->Tag->find('list'));
     }
 
     public function view($id = null) {
@@ -62,29 +70,25 @@ class PostsController extends AppController {
            if (!$this->request->data) {
                $this->request->data = $post;//もしも$his->request->dataで来なければ$postを$this->request->dataへ代入する
            }
-
        }
 
-    public function add() {
-            $this->loadModel('Category');
+    public function add(){
+        //    $this->render('/posts/index');
             $category = $this->Category->find('list', array(
                 'recursive' => -1
             ));
-            $this->set('category_name', $category);
-            $this->set('tag',$this->Tag->find('list'));
-
+            $this->set('categories', $category);
+            $this->set('tags',$this->Tag->find('list'));
             if ($this->request->is('post')) {//postにidがセットされているかtrueかfalseで返す
                 $this->Post->create();
-                //debug($this->Auth->user('id'));
-                //exit;
         $this->request->data['Post']['user_id'] = $this->Auth->user('id');//私用しているユーザーのidを
+            if(isset($this->request->data['Image'])){
             foreach ($this->request->data['Image'] as $index=>$images){
                 if($images['attachment']['error'] == 4){
                     unset($this->request->data['Image'][$index]);
                 }
             }
-        //debug($this->request->data);
-        //exit;
+        };
             if ($this->Post->saveAll($this->request->data,array('deep' => true))) {
                 $this->Flash->success(__('Your post has been saved.'));
                 return $this->redirect(array('action' => 'index'));
@@ -94,6 +98,7 @@ class PostsController extends AppController {
     }
 
 public function edit($id = null) {//$idの中には洗濯したeditのPostのidが入っている
+
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));
     }
@@ -106,8 +111,8 @@ public function edit($id = null) {//$idの中には洗濯したeditのPostのid�
     $category = $this->Category->find('list', array(
          'recursive' => -1
     ));
-    $this->set('category_name', $category);
-    $this->set('tag',$this->Tag->find('list'));
+    $this->set('categories', $category);
+    $this->set('tags',$this->Tag->find('list'));
 
     if ($this->request->is(array('post', 'put'))) {//is()はリクエストがある基準に適合するかどうかを調べます
         $this->Post->id = $id;  //$this->Post->id=Postモデルのpost_id $idはリクエストされてきた記事のid
@@ -120,6 +125,7 @@ public function edit($id = null) {//$idの中には洗濯したeditのPostのid�
                 }
             }
         }
+
         if ($this->Post->saveAll($this->request->data,array('deep' => true))) {//Postモデル(DB)にセーブする
             $this->Flash->success(__('Your post has been updated.'));
             return $this->redirect(array('action' => 'index'));

@@ -44,9 +44,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
 		</div>-->
 		<div id="content">
-
+			<?php echo $this->element('header'); ?>
+			<?php echo $this->Form->end(); ?>
 			<?php echo $this->Flash->render(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<!--<div id="footer">
@@ -62,6 +62,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		</div>-->
 	</div>
 	<!--<?php echo $this->element('sql_dump'); ?>-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<?php echo $this->Html->script('index.js');?>
 </body>
 
 </html>

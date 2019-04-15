@@ -85,6 +85,13 @@ class Post extends AppModel {
   public function isOwnedBy($post, $user) {
     return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
 }
-}
 
-?>
+/*$dataSource = $this->getDataSource();
+$dataSource->begin();
+
+if () {
+    $dataSource->commit();
+} else {
+    $dataSource->rollback();
+}*/
+}
