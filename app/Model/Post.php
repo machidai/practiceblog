@@ -18,7 +18,10 @@ class Post extends AppModel {
             'method' => 'findByTag',
             'field' => 'Post.id',
         ),
-
+        'created' => array(
+            'type' => 'value',
+            'field' => 'created',
+        ),
   );
     //orの状態(邦楽だけか、邦楽とそれ以外が入っているもの)
     //andにする

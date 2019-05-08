@@ -1,7 +1,7 @@
 <?php
 echo $this->Form->create('Post',array('type'=>'> file',
-'enctype' => 'multipart/form-data'));
-echo $this->Form->input('title');
+'enctype' => 'multipart/form-data','class' =>'margin'));
+echo $this->Form->input('title',array('rows' => '1'));
 echo $this->Form->input('content', array('rows' => '3'));
 echo $this->Form->input('id', array('type' => 'hidden'));
 echo $this->Form->select('category_id',$categories);

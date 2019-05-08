@@ -9,9 +9,9 @@ public $actsAs = array(
             "path" => "{ROOT}webroot{DS}img{DS}image{DS}",
             "rootDir" => ROOT . DS . APP_DIR . DS,
             'thumbnailSizes' => array(
-                'xvga' => '1024x768',
-                'vga' => '640x480',
-                'thumb' => '80x80',
+                'thumb150' => '150x150',
+                'normal' => '200x200',
+                'big' => '500x500'
             ),
         ),
     ),

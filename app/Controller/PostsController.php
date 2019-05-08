@@ -16,6 +16,9 @@ class PostsController extends AppController {
        'tag_id' => array(
           'type' => 'value',
       ),
+      'created' =>array(
+          'type' => 'value',
+      ),
    );
 
     public function isAuthorized($user) {
@@ -45,8 +48,9 @@ class PostsController extends AppController {
         //exit;
         $this->Prg->commonProcess();//検索条件データの関連付けを行う。
         $this->paginate = array(
-            'limit' => 10,
+            'limit' => 5,
            'conditions' => $this->Post->parseCriteria($this->passedArgs),//getで受け取ったものが$this->passedArgsに入る
+           'order' => array('Post.created' => 'desc'),
     );      $post = $this->paginate();
             /*if ($this->request->is('requested')) {
                 return $posts;

@@ -1,17 +1,11 @@
 <?php
 
-
-
-
 App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
-
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('add','logout','delete');
-
-        
     }
 
     public function login() {
@@ -42,6 +36,7 @@ public function logout() {
     }
 
     public function add() {
+        $this->loadModel('Zipcode');
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {

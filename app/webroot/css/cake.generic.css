@@ -14,22 +14,52 @@
  * @package       app.webroot.css
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+ /*index画面*/
+.card{
+	margin:30px;
+}
+.card-content{
+	display: inline-block;
+}
+.thumbnail{
+	display: inline-block;
+	float: right;
+}
+.created,.edit,.delete{
+	display: inline-block;
+}
+.edit,.delete{
+	padding-left: 10px;
+}
+.btn-outline-primary{
+	margin-bottom:1em;
+}
 
 .main{
-	/*float: left;*/
-	/*width: 70%;*/
+	float: left;
+	width: 70%;
 	margin-bottom: 40px;
 }
 .sidebar{
-	/*float: right;*/
-	/*width: 28%;*/
-	padding-left: 20px;
-	margin-top: 150px;
+	float: right;
+	width: 30%;
+	margin-top: 180px;
+}
+.archives{
 	background-color: #EEEEEE;
+	margin: 20px 20px 20px 0;
+}
+.archives p{
+	padding: 10px 0 10px 10px;
+	margin: 0;
+}
+.archives ul{
+	list-style: none;
 }
 .search{
 	width: 350px;
 	height: 300px;
+	margin-top: 40px;
 	background-color: #EEEEEE;
 	clear: both;
 	display: none;
@@ -44,6 +74,7 @@ header{
 	height: 150px;
 	display: table;
  	width: 100%;
+	margin-top:40px;
 }
 .title{
 	font-size: 60px;
@@ -81,8 +112,29 @@ footer{
 	margin:0;
 	font-size: 15px;
 }
+/*header.ctp*/
+.nav-tabs{
+	position: fixed;
+	z-index: 10;
+	background-color: #CCFFFF;
+	width: 100%;
+}
+/*add画面*/
+.margin{
+	margin-top:45px;
+}
 
-
+/*adduser画面*/
+.txt{
+	width: 120px;
+	height: 30px;
+}
+.txt2{
+	height: 30px;
+}
+.txt3{
+	height: 30px;
+}
 
 
 
@@ -135,7 +187,7 @@ h4 {
 	color: #993;
 	font-weight: normal;
 }
-ul, li {
+li {
 	margin: 0 12px;
 }
 p {

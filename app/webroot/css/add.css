@@ -1,0 +1,35 @@
+table{
+    margin: 20px auto 0;
+    border-collapse: collapse;
+}
+table th td{
+    border:solid ipx #BBB;
+    letter-spacing: 1px;
+}
+th{
+    width: 50px;
+    padding: 0 10px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+td{
+    width: 70px;
+    padding: 0 10px;
+    
+}
+tr{
+    width:100px;
+}
+.txt{
+    width: 65px;
+    height: 30px;
+    margin: 5px 1px;
+    padding: 2px 5px;
+    border:solid 1px #999;
+}
+.txt2{
+    margin:5px 1px;
+    width:190px;
+    padding:2px 5px;
+    border:solid 1px #999;
+}

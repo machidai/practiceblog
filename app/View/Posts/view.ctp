@@ -1,12 +1,10 @@
 
 <?php $posts=$this->request->data['Post'] ?>
 
-<h1><?php echo h($posts['title']); ?></h1>
-
-<p><small>Created: <?php echo $posts['created']; ?></small></p>
+<h1 class="margin"><?php echo h($posts['title']); ?></h1>
 
 <p><?php echo h($posts['content']); ?></p>
-
+<!--<p><small>Created: <?php echo $posts['created']; ?></small></p>-->
 <h1>画像</h1>
 <div class="slider-block">
     <?php foreach ($this->request->data['Image'] as $index => $images):?>
