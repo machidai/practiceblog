@@ -13,26 +13,26 @@
 <div class="admbox">
     <table>
      <tr>
-       <th>郵便番号</th>
+       <th>郵便番号</br>(ハイフン不要)</th>
        <td><?php echo $this->Form->input('Zipcode.code',array(
             'type' => 'text',
             'class' => 'txt',
             'id' => 'zip_input',
             'maxlength'=> '7',
-       )); ?></td>
+       )); ?><div class="error_box"></div></td>
      </tr>
     <tr>
        <th>都道府県</th>
        <td><?php echo $this->Form->input('Zipcode.prefecture',array(
             'type' => 'text',
-            'class' =>'prefecture',
+            'class' =>'prefecture text',
        )); ?></td>
    </tr>
      <tr>
        <th>市区町村</th>
        <td><?php echo $this->Form->input('Zipcode.city',array(
             'type' => 'text',
-            'class' =>'city',
+            'class' =>'city text',
        )); ?></td>
      </tr>
  </table>
